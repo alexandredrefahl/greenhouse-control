@@ -1,0 +1,162 @@
+///////////////////////////////////////////////////////////////////////////
+////        (C) Copyright 1996,2003 Custom Computer Services           ////
+//// This source code may only be used by licensed users of the CCS C  ////
+//// compiler.  This source code may only be distributed to other      ////
+//// licensed users of the CCS C compiler.  No other use, reproduction ////
+//// or distribution is permitted without written permission.          ////
+//// Derivative programs created using this software in object code    ////
+//// form are not restricted in any way.                               ////
+///////////////////////////////////////////////////////////////////////////
+
+#ifndef _STDLIB
+#define _STDLIB
+
+//---------------------------------------------------------------------------
+// Definitions and types
+//---------------------------------------------------------------------------
+
+#ifndef RAND_MAX
+#define RAND_MAX  32767    // The value of which is the maximum value
+                           // ... returned by the rand function
+#endif
+
+typedef struct {
+   signed int quot;
+   signed int rem;
+} div_t;
+
+typedef struct {
+   signed long quot;
+   signed long rem;
+} ldiv_t;
+
+#include <stddef.h>
+
+//---------------------------------------------------------------------------
+// String conversion functions
+//---------------------------------------------------------------------------
+/***********************************************************/
+/*Search functions*/
+/* standard template: void *memchr(const char *s, int c).
+   Finds first occurrence of c in n characters of s */
+
+char *memchr(void *s,int c,size_t n)
+{
+   char uc;
+   char *su;
+   uc=c;
+   for(su=s;0<n;++su,--n)
+      if(*su==uc)
+      return su;
+   return NULL;
+}
+
+int *strlen(char *s)
+{
+   char *sc;
+
+   for (sc = s; *sc != 0; sc++);
+   return(sc - s);
+}
+
+signed long strtol(char *s,char *endptr,signed int base);
+
+/* Standard template: long strtoul(char * s,char *endptr,signed int base)
+ * converts the initial portion of the string s, represented as an
+ * integral value of radix base to a unsigned long.
+ * returns the converted value if any, 0 otherwise
+ * the final string is returned in the endptr, if endptr is not null
+ */
+
+
+signed long strtol(char *s,char *endptr,signed int base)
+{
+   char *sc,*s1,*sd;
+   signed long x=0;
+   char sign;
+   char digits[]="0123456789abcdefghijklmnopqstuvwxyz";
+   for(sc=s;isspace(*sc);++sc);
+   sign=*sc=='-'||*sc=='+'?*sc++:'+';
+   if (base <0 || base ==1|| base >36) // invalid base
+   {
+      if (endptr)
+      {
+        *((char *)endptr)=s;
+      }
+      return 0;
+   }
+   else if (base)
+   {
+      if(base==16 && *sc =='0'&&(sc[1]=='x' || sc[1]=='X'))
+         sc+=2;
+      if(base==8 && *sc =='0')
+         sc+=1;
+      if(base==2 && *sc =='0'&&sc[1]=='b')
+         sc+=2;
+
+   }
+   else if(*sc!='0') // base is 0, find base
+      base=10;
+   else if (sc[1]=='x' || sc[1]=='X')
+      base =16,sc+=2;
+   else if(sc[1]=='b')
+      base=2,sc+=2;
+   else
+      base=8;
+   for (s1=sc;*sc=='0';++sc);// skip leading zeroes
+
+   sd=memchr(digits,tolower(*sc),base);
+   for(;sd!=0;)
+   {
+      x=x*base+(int16)(sd-digits);
+      ++sc;
+      sd=memchr(digits,tolower(*sc),base);
+   }
+   if(s1==sc)
+   {
+      if (endptr)
+      {
+        *((char *)endptr)=s;
+      }
+   return 0;
+   }
+   if(sign=='-')
+      x  =-x;
+   if (endptr)
+        *((char *)endptr)=sc;
+   return x;
+}
+
+signed int system(char *string)
+{
+   return 0;
+}
+
+int mblen(char *s,size_t n)
+{
+   return strlen(s);
+}
+
+int mbtowc(wchar_t *pwc,char *s,size_t n)
+{
+   *pwc=*s;
+   return 1;
+}
+
+int wctomb(char *s,wchar_t wchar)
+{
+   *s=wchar;
+   return 1;
+}
+
+size_t mbstowcs(wchar_t *pwcs,char *s,size_t n)
+{
+   strncpy(pwcs,s,n);
+   return strlen(pwcs);
+}
+
+size_t wcstombs(char *s,wchar_t *pwcs,size_t n)
+{
+   strncpy(s,pwcs,n);
+   return strlen(s);
+}

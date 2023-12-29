@@ -1,0 +1,97 @@
+
+ROM used: 6604 (81%)
+          7589 (93%) including unused fragments
+
+          3 Average locations per line
+          9 Average locations per statement
+
+RAM used: 62 (35%) at main() level
+          139 (79%) worst case
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  392   146  21  J:\Controle Estufa\Controlador_4.c
+  277     0   0  C:\Arquivos de programas\PICC\devices\16f877.h
+  200    83  10  J:\Controle Estufa\i2c.h
+  276    71   8  J:\Controle Estufa\PCF_RTC.c
+  107    23   2  J:\Controle Estufa\math_mod.h
+  132    56   5  J:\Controle Estufa\mod_lcd.h
+   37    19   2  J:\Controle Estufa\input_mod.c
+   28     0   0  C:\Arquivos de programas\PICC\drivers\ctype.h
+  208   111  10  J:\Controle Estufa\sht11_drv.c
+   68    20   2  J:\Controle Estufa\eeprom.h
+  180    66   5  J:\Controle Estufa\stdlib_mod.h
+   28     0   0  C:\Arquivos de programas\PICC\drivers\stddef.h
+  234   113   9  J:\Controle Estufa\funcoes.h
+----- -----
+ 4334  1416 Total
+
+Page ROM  %  RAM  Functions:
+---- --- --- ---  ----------
+0     21   0   1  @delay_ms1
+0     52   1   3  @I2C_READ_1_65_64_4000000
+0     57   1   1  @I2C_WRITE_1_65_64_4000000
+0     17   0   1  i2c_le_ack
+0     32   0   2  I2C_escreve_byte
+0    110   2   6  escreve_eeprom
+0    120   2   6  le_eeprom
+2     42   1   7  escreve_eeprom_16
+0     46   1   2  PCF8583_write_byte
+1     17   0   2  bin2bcd
+0     21   0   3  bcd2bin
+1    275   4  10  PCF8583_read_datetime
+2     63   1  10  @FLT
+1    367   6  16  @ADDFF
+1    146   2  13  @MULFF
+0     46   1   1  envia_nibble_lcd
+0     32   0   3  envia_byte_lcd
+0      6   0   1  escreve_lcd
+0      8   0   0  limpa_lcd
+0     18   0   4  lcd_pos_xy
+0     67   1   0  inicializa_lcd
+0     48   1   0  cria_caractere
+0     30   0   2  @ITOF
+0     51   1   0  TransmitStart
+0     28   0   1  RST_Connection
+1    111   2   5  ReadValue
+0     48   1   2  SendCommand
+0     67   1   3  WriteStatReg
+1    107   2   7  ReadTemperature
+2    241   4   6  ReadHumidity
+1     32   0   4  @SFTOI
+2     48   1   8  write_float_eeprom
+0     35   1   8  read_float_eeprom
+0     45   1   6  read_eeprom_16
+0     76   1   5  write_eeprom_16
+0     25   0   6  memchr
+0    378   6  48  strtol
+0     25   0   5  @MUL1616
+2    443   7  26  arruma_hora
+0     19   0   0  @const10689
+0     21   0   3  @DIV88
+0     50   1   2  @PRINTF_U_404
+2    245   4   7  Max_Min
+1    392   6  18  @PRINTF_F_404
+1    582   9  16  trata_serial
+0     53   1   2  @PRINTF_U_9600_62_63
+0     90   1   8  @PRINTF_LU_9600_62_63
+0     12   0   0  @const10864
+0     65   1   6  @DIVS1616
+0      9   0   0  @const10890
+0     37   1   2  @MUL88
+0    106   2   8  @PRINTF_LD_404
+0      5   0   0  @const10930
+3   1445  22  33  main
+0     19   0   0  @const10948
+0     16   0   0  @const10952
+0     19   0   0  @const10967
+0     14   0   0  @const10978
+
+ Segment   Used  Free
+---------  ----  ----
+00000-00003     4  0
+00004-007FF  2044  0
+00800-00FFF  2029  19
+01000-017FF  1082  966
+01800-01FFF  1445  603
+
